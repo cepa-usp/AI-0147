@@ -1,0 +1,4 @@
+h1. Tabela de plantas
+
+Esta atividade interativa é uma tabela para completar os espaços com as peças disponíveis.
+
