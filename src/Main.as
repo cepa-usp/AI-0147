@@ -1,4 +1,4 @@
-package 
+﻿package 
 {
 	import BaseAssets.BaseMain;
 	import cepa.utils.ToolTip;
@@ -38,7 +38,7 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			this.scrollRect = new Rectangle(0, 0, 700, 700);
+			this.scrollRect = new Rectangle(0, 0, 700, 760);
 			
 			addListeners();
 			
