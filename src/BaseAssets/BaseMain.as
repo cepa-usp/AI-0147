@@ -85,7 +85,7 @@ package BaseAssets
 			botoes.creditos.addEventListener(MouseEvent.CLICK, openCreditos);
 			botoes.resetButton.addEventListener(MouseEvent.CLICK, reset);
 			
-			//createToolTips();
+			createToolTips();
 		}
 		
 		/**

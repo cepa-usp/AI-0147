@@ -329,7 +329,7 @@
 			}else if (child is Peca9) {
 				child.fundo = [fundo9];
 				child.nome = "peca9";
-			
+			}
 		}
 		
 		override public function reset(e:MouseEvent = null):void
