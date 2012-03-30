@@ -64,14 +64,20 @@
 					nPecas++;
 					if(Peca(child).fundo.indexOf(Peca(child).currentFundo) != -1){
 						nCertas++;
+						trace(Peca(child).nome);
 					}
 				}
 			}
 			
 			var currentScore:Number = int((nCertas / nPecas) * 100);
 			
-			if (currentScore < 100) feedbackScreen.setText("Releia a questão e avalie a sequência escolhida.");
-			else feedbackScreen.setText("Parabéns!\nA sequência está correta.!");
+			trace(currentScore, nPecas, nCertas);
+			if (currentScore < 100) {
+				feedbackScreen.setText("Releia a questão e avalie a sequência escolhida.");
+			}
+			else {
+				feedbackScreen.setText("Parabéns!\nA sequência está correta!");
+			}
 			setChildIndex(feedbackScreen, numChildren - 1);
 			setChildIndex(bordaAtividade, numChildren - 1);
 		}
@@ -125,9 +131,26 @@
 					child.addEventListener(Event.ACTIVATE, verifyForFilter);
 					Peca(child).buttonMode = true;
 					Peca(child).gotoAndStop(1);
+					if (child is Peca8 || child is Peca9) {
+						child.addEventListener(MouseEvent.MOUSE_OVER, overMc);
+						child.addEventListener(MouseEvent.MOUSE_OUT, outMc);
+					}
 				}
 				
 			}
+		}
+		
+		private function overMc(e:MouseEvent):void
+		{
+			var peca:Peca = Peca(e.target);
+			peca.gotoAndStop(2);
+			setChildIndex(peca, numChildren - 1);
+		}
+		
+		private function outMc(e:MouseEvent):void
+		{
+			var peca:Peca = Peca(e.target);
+			peca.gotoAndStop(1);
 		}
 		
 		private var pecaDragging:Peca;
@@ -298,15 +321,33 @@
 				child.fundo = [fundo6];
 				child.nome = "peca6";
 			}else if (child is Peca7) {
-				child.fundo = [fundo4];
+				child.fundo = [fundo7];
 				child.nome = "peca7";
 			}else if (child is Peca8) {
-				child.fundo = [fundo5];
+				child.fundo = [fundo8];
 				child.nome = "peca8";
 			}else if (child is Peca9) {
-				child.fundo = [fundo6];
+				child.fundo = [fundo9];
 				child.nome = "peca9";
 			}
+		}
+		
+		override public function reset(e:MouseEvent = null):void
+		{
+			for (var i:int = 0; i < numChildren; i++)
+			{
+				var child:DisplayObject = getChildAt(i);
+				if (child is Peca) {
+					child.x = Peca(child).inicialPosition.x;
+					child.y = Peca(child).inicialPosition.y;
+					Peca(child).currentFundo = null;
+				}
+				if (child is Fundo) {
+					Fundo(child).currentPeca = null;
+				}
+			}
+			
+			verificaFinaliza();
 		}
 		
 	}
